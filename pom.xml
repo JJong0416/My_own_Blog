@@ -18,15 +18,14 @@
 	</properties>
 	<dependencies>
 		<!--  추가 라이브러리 시작 -->
-		
-		<!-- 시큐리티 태그 라이브러리 -->
+	<!-- 시큐리티 태그 라이브러리 -->
 	<!-- 
 	<dependency>
 	  <groupId>org.springframework.security</groupId>
 	  <artifactId>spring-security-taglibs</artifactId>
 	</dependency>
 	 -->
-	
+	 
 	<!-- JSP 템플릿 엔진 -->
 	<dependency>
 	  <groupId>org.apache.tomcat.embed</groupId>
@@ -37,15 +36,16 @@
 	<dependency>
 	  <groupId>javax.servlet</groupId>
 	  <artifactId>jstl</artifactId>
-	</dependency>
+	</dependency>		
 		
-	<!-- 추가 라이브러리 종료 -->
 		
+		<!-- 추가 라이브러리 종료 -->
+ 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
-		 
+
 		<!-- 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -64,20 +64,19 @@
 			<scope>runtime</scope>
 			<optional>true</optional>
 		</dependency>
-		
-		
+
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<scope>runtime</scope>
 		</dependency>
 		 
-		 
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
 		</dependency>
+		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -91,7 +90,6 @@
 			<scope>test</scope>
 		</dependency>
 		 -->
-		 
 	</dependencies>
 
 	<build>
