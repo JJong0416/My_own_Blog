@@ -21,7 +21,7 @@ spring:
     password: cos1234
     
   jpa:
-    open-in-view: true
+    open-in-view: true #이걸 True로 해주면, Lazy 로딩이 가능하게 된다. 왜냐면 영속성을 프레젠테이션 계층까지 가져가게 된다.
     hibernate:
       ddl-auto: update # ddl-auto는 update, none. create등 많다. // 그렇기에 맨처음에만 create 그 이후에는 무조건 update로 바꿔놔야한다. 
       naming:

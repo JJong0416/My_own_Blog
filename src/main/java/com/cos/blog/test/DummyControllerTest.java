@@ -40,14 +40,7 @@ public class DummyControllerTest {
 		}
 		return "삭제되었습니다. id:" + id;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
+
 	// save함수는 id를 전달하지 않거나, 전달했는데 데이터 없으면 insert
 	// save함수는 id를 전달했는데 전달한 값이 있으면 update
 	@Transactional // 함수 종료시 자동커밋 

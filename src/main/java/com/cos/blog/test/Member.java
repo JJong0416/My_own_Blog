@@ -1,10 +1,8 @@
 package com.cos.blog.test;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
 public class Member {
 	private int id;
 	private String username;
