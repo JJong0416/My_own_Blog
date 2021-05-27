@@ -19,10 +19,8 @@ public class UserApiController {
 	@Autowired
 	private UserService userService;
 	
-	@Autowired
-	private HttpSession session;
-	
-	@PostMapping("/api/user")
+
+	@PostMapping("/auth/joinProc")
 	public ResponseDto<Integer> save(@RequestBody User user) { // Username, password, email
 		// DB에 Insert 하고 아래에서 return이 되면 된다.
 		
@@ -31,9 +29,14 @@ public class UserApiController {
 		return new ResponseDto<Integer>(HttpStatus.OK.value(),1);  // 반환값은 정상값인 200과 1을 반환
 	}
 	
-	@PostMapping("/api/user/login")
-	public ResponseDto<Integer> login(@RequestBody User user){
-		 System.out.println("UserApiController : login 호출됨"); // Ctrl + Space 잊지말자..!!
+	
+	
+	/* 
+	 @Autowired
+	private HttpSession session;
+	 
+	 @PostMapping("/api/user/login")
+	public ResponseDto<Integer> login(@RequestBody User user, HttpSession session){
 		 User principal =  userService.로그인(user); //principal(접근주체)
 		 
 		 if (principal != null) { // null이 아니면 세션을 만들어준다.
@@ -44,4 +47,6 @@ public class UserApiController {
 		 // 세션을 만들고나서 1을 응답하면 loginform에서 user.js 실행될 때, login이 완료되면 /blog로가고
 		 // 블로그 가게되면 header.jsp 실행후 jstl 연결
 	}
+	 */
+	
 }
