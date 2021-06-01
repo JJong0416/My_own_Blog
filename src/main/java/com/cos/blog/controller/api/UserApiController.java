@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.cos.blog.dto.ResponseDto;
-import com.cos.blog.model.RoleType;
 import com.cos.blog.model.User;
 import com.cos.blog.service.UserService;
 
@@ -23,12 +22,10 @@ public class UserApiController {
 	@PostMapping("/auth/joinProc")
 	public ResponseDto<Integer> save(@RequestBody User user) { // Username, password, email
 		// DB에 Insert 하고 아래에서 return이 되면 된다.
-		
-		user.setRole(RoleType.USER);
 		userService.회원가입(user);
 		return new ResponseDto<Integer>(HttpStatus.OK.value(),1);  // 반환값은 정상값인 200과 1을 반환
 	}
-	
+	// 여기에 /auth/loginProc를 안만드는 이유는 시큐리티가 loginForm에서 가로채게 만들기 위해서.
 	
 	
 	/* 
