@@ -16,6 +16,13 @@ public class Member {
 		this.password = password;
 		this.email = email;
 	}
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> 646cf0f (스프링 시큐리티 로그인)
+>>>>>>> b3bbba3 (스프링 시큐리티 로그인 구현)
 //	
 //	public int getId() {
 //		return id;
@@ -48,4 +55,12 @@ public class Member {
 //	public void setEmail(String email) {
 //		this.email = email;
 //	}
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+=======
+>>>>>>> 722d462 (스프링 시큐리티 로그인)
+>>>>>>> 646cf0f (스프링 시큐리티 로그인)
+>>>>>>> b3bbba3 (스프링 시큐리티 로그인 구현)
 }

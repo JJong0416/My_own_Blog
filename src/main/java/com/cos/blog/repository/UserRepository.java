@@ -1,5 +1,16 @@
 package com.cos.blog.repository;
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+import java.util.Optional;
+
+>>>>>>> 722d462 (스프링 시큐리티 로그인)
+>>>>>>> 646cf0f (스프링 시큐리티 로그인)
+>>>>>>> b3bbba3 (스프링 시큐리티 로그인 구현)
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -8,7 +19,20 @@ import com.cos.blog.model.User;
 //DAO라고 생각하면 된다. 
 // 또한 자동으로 bean 등록이 된다. 띠리서 @Repository가 생략이 가능하다.
 public interface UserRepository extends JpaRepository<User, Long> { // 해당 jpa 레파지토리는 유저 테이블이 관리하는 repository. 그리고 p.k는 숫자다 
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+
+=======
+<<<<<<< HEAD
+
+=======
+	//SELECT * FROM user WHERE username = 1?;
+	Optional<User> findByUsername(String username);
+>>>>>>> 722d462 (스프링 시큐리티 로그인)
+>>>>>>> 646cf0f (스프링 시큐리티 로그인)
+>>>>>>> b3bbba3 (스프링 시큐리티 로그인 구현)
 }
 //JPA Naming 쿼리
 // JPA에는 findByUsernameAndPassword 라는 함수가 없는데
