@@ -41,7 +41,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		http
 			.csrf().disable() // csrf 토큰 비활성화 (테스트 시 걸어두는게 좋다 )  default는 csrf Token을 걸어두지 않으면, default로 걸려서 시큐리티가 실행된다.
 			.authorizeRequests()
-				.antMatchers("/","/auth/**","/js/**","/css/**","/image/**")
+				.antMatchers("/","/auth/**","/js/**","/css/**","/image/**") // 이 주소를 제외한 모든 주소는 인증을 하고 들어가야한다.
 				// 어떤 Request가 /auth 하위 URI쪽으로 들어오면 모두 허가해주고, 이게 아닌 다른 모든 요청은 인증이 되어야 한다.
 				.permitAll()
 				.anyRequest()

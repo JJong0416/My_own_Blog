@@ -22,6 +22,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor // 빈 생성자
 @AllArgsConstructor // 전체생정자
 @Builder // 빌더 패턴
+
 //@DynamicInsert  // 다이나믹 인서트는 null인 필드를 제외
 public class User {
  

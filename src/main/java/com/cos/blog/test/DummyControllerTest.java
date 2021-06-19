@@ -46,15 +46,15 @@ public class DummyControllerTest {
 	@Transactional // 함수 종료시 자동커밋 
 	@PutMapping("/dummy/user/{id}") //json 데이터 요청 -> Java Object(MessageConverter의 Jackson 라이브러리로 받아서 변환해준다. 이때 필요한 어노테이션이 RequestBody
 	public User updateUser (@PathVariable Long id, @RequestBody User requestUser) {
-		
+
 		// 첫번째로는 id값을 통해서 유저를 찾아와야한다. 안그러면 모든 값들 다 불러와서 다시 저장해야하기 때문.
 		User user = userRepository.findById(id).orElseThrow(()->{
 			return new IllegalArgumentException("수정 실패");
 		});
-		
+
 		user.setPassword(requestUser.getPassword());
 		user.setEmail(requestUser.getEmail());
-		
+
 		//userRepository.save(user);
 		// 더티 체킹
 		return user;
