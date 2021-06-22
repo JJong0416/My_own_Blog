@@ -26,7 +26,7 @@ import lombok.NoArgsConstructor;
 public class Reply {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // auto_increment
-	private Long id;
+	private int id;
 	
 	@Column(nullable = false, length = 200)
 	private String content;

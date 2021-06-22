@@ -32,7 +32,7 @@ public class DummyControllerTest {
 	private UserRepository userRepository;	
 	
 	@DeleteMapping("/dummy/user/{id}")
-	public String delete(@PathVariable Long id) {
+	public String delete(@PathVariable int id) {
 		try {
 			userRepository.deleteById(id);
 		}catch(EmptyResultDataAccessException e){
@@ -45,7 +45,7 @@ public class DummyControllerTest {
 	// save함수는 id를 전달했는데 전달한 값이 있으면 update
 	@Transactional // 함수 종료시 자동커밋 
 	@PutMapping("/dummy/user/{id}") //json 데이터 요청 -> Java Object(MessageConverter의 Jackson 라이브러리로 받아서 변환해준다. 이때 필요한 어노테이션이 RequestBody
-	public User updateUser (@PathVariable Long id, @RequestBody User requestUser) {
+	public User updateUser (@PathVariable int id, @RequestBody User requestUser) {
 
 		// 첫번째로는 id값을 통해서 유저를 찾아와야한다. 안그러면 모든 값들 다 불러와서 다시 저장해야하기 때문.
 		User user = userRepository.findById(id).orElseThrow(()->{
@@ -69,16 +69,16 @@ public class DummyControllerTest {
 	// 한페이지당 2건의 데이터를 리턴할 예정
 	// 페이지 시작은 0부터
 	@GetMapping("/dummy/user")
-	public List<User> pageList (@PageableDefault(size=2, sort="id",direction = Sort.Direction.DESC) Pageable pageable){ 
+	public Page<User> pageList (@PageableDefault(size=2, sort="id",direction = Sort.Direction.DESC) Pageable pageable){ 
 		Page<User> pagingUser = userRepository.findAll(pageable);
 		List<User> users = pagingUser.getContent(); 
-		return users;
+		return pagingUser;
 	}
 	
 	
 	//ex) http://localhost:7070/blog/dummy/user/1,2,3, ....
 	@GetMapping("/dummy/user/{id}")
-	public User detail(@PathVariable Long id) {
+	public User detail(@PathVariable int id) {
 		User user = userRepository.findById(id).orElseThrow(new Supplier<IllegalArgumentException>() {
 			@Override
 			public IllegalArgumentException get() {

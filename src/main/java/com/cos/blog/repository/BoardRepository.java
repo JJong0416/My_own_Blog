@@ -8,6 +8,6 @@ import org.springframework.data.jpa.repository.Query;
 import com.cos.blog.model.Board;
 import com.cos.blog.model.User;
 
-public interface BoardRepository extends JpaRepository<Board, Long> {
+public interface BoardRepository extends JpaRepository<Board, Integer> {
 	
 }

@@ -32,7 +32,7 @@ import lombok.NoArgsConstructor;
 public class Board {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // auto_increment
-	private Long id;
+	private int id;
 	
 	@Column(nullable = false, length = 100)
 	private String title;

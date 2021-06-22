@@ -28,7 +28,7 @@ public class User {
  
 	@Id //P.K
 	@GeneratedValue(strategy = GenerationType.IDENTITY) // 해당 프로젝트 연결된 db의 넘버링 전략을 따라간다.
-	private Long id; // 시컨스, auto_increment  
+	private int id; // 시컨스, auto_increment  
 	
 	@Column(nullable = false, length = 30, unique = true) // null이 불가능하고, 길이제한
 	private String username; 
