@@ -15,7 +15,7 @@ import com.cos.blog.dto.ResponseDto;
 import com.cos.blog.model.Board;
 import com.cos.blog.service.BoardService;
 
-@RestController
+@RestController // Rest는 그냥 데이터처리, Controller는 html 만드는 처리
 public class BoardApiController {
 
 	@Autowired
@@ -23,7 +23,8 @@ public class BoardApiController {
 	
 	@PostMapping("/api/board")
 	public ResponseDto<Integer> save(@RequestBody Board board, @AuthenticationPrincipal PrincipalDetail principal) { // board.js에서 title과 content를 받고 나서
-																																																	//user오브젝트와 함꼐 글쓰기에 들고간다.
+																																						
+		//user오브젝트와 함꼐 글쓰기에 들고간다.
 		boardService.글쓰기(board,principal.getUser( ));
 		return new ResponseDto<Integer>(HttpStatus.OK.value(),1);
 	}

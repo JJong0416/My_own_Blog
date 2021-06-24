@@ -4,7 +4,7 @@
 
 
 <sec:authorize access="isAuthenticated()">
-	<sec:authentication property="principal" var="principal"/>
+	<sec:authentication property="principal" var="principal"/> <!--  현재 세션으로 저장된 로그인한 정보가 principal로 들어가있다. -->
 </sec:authorize>	
 
 <!DOCTYPE html>

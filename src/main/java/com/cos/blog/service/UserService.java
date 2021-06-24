@@ -28,6 +28,22 @@ public class UserService {
 		userRepository.save(user);
 	}
 
+	@Transactional
+	public void 회원수정(User user) { // 이 유저는 웹으로부터 받은 유저 데이터
+		// 수정시에는 Jpa 영속성 컨텍스트 User 오브젝트를 영속화시키고, 영속화 된 오브젝트를 수정하는 방식으로 진행한다.
+		// Select를 먼저 하는 이유는 User오브젝트를 DB로부터 영속성 컨텍스트에 옮기기 위해서
+		// 더티체킹을 이용한 회원수정 방식으로 진행
+		User persistance = userRepository.findById(user.getId()).orElseThrow(()->{
+			return new IllegalArgumentException("회원 찾기 실패");
+		}); // 만약 찾았으면, persistance 변수에 오브젝트가 들어왔을 것이다.
+		String rawPassword = user.getPassword();
+		String encPassword = encoder.encode(rawPassword); // 해쉬화
+		persistance.setPassword(encPassword);
+		persistance.setEmail(user.getEmail());
+		// 회원 수정 함수 종료 시 = 서비스 종료 = 트랜잭션 종료 = 자동 커밋(더티체킹) -> update문 날려준다.
+	}
+	
+	
 //	@Transactional(readOnly = true) // Select할 때 트랜잭션 시작, 서비스 종료시에 트랜잭션 종료(이때까지 정합성 유지)
 //	public User 로그인(User user) {
 //		return userRepository.findByUsernameAndPassword(user.getUsername(),user.getPassword());
