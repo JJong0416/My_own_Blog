@@ -2,6 +2,10 @@ package com.cos.blog.service;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -36,13 +40,24 @@ public class UserService {
 		User persistance = userRepository.findById(user.getId()).orElseThrow(()->{
 			return new IllegalArgumentException("회원 찾기 실패");
 		}); // 만약 찾았으면, persistance 변수에 오브젝트가 들어왔을 것이다.
-		String rawPassword = user.getPassword();
-		String encPassword = encoder.encode(rawPassword); // 해쉬화
-		persistance.setPassword(encPassword);
-		persistance.setEmail(user.getEmail());
+		
+		//Validate 체크 => oauth필드 값이 없으면 수정 가능
+		if (persistance.getOauth() == null || persistance.getOauth().equals("")) {
+			String rawPassword = user.getPassword();
+			String encPassword = encoder.encode(rawPassword); // 해쉬화
+			persistance.setPassword(encPassword);
+			persistance.setEmail(user.getEmail());
+		}		
 		// 회원 수정 함수 종료 시 = 서비스 종료 = 트랜잭션 종료 = 자동 커밋(더티체킹) -> update문 날려준다.
 	}
 	
+	@Transactional(readOnly = true)
+	public User 회원찾기(String username) {
+		User user = userRepository.findByUsername(username).orElseGet(()->{
+			return new User();
+		});
+		return user;
+	}
 	
 //	@Transactional(readOnly = true) // Select할 때 트랜잭션 시작, 서비스 종료시에 트랜잭션 종료(이때까지 정합성 유지)
 //	public User 로그인(User user) {
