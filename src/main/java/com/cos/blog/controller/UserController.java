@@ -1,7 +1,5 @@
 package com.cos.blog.controller;
 
-import java.util.UUID;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -131,12 +129,6 @@ public class UserController {
 			} catch(JsonProcessingException e) {
 				e.printStackTrace();
 			}
-			// User 오브젝트 : username,  password, email 
-			System.out.println("카카오 아이디(번호) : " + kakaoprofile.getId());
-			System.out.println("카카오 이메일 : " + kakaoprofile.getKakao_account().getEmail());
-			System.out.println("블로그서버 유저네임 : " + kakaoprofile.getKakao_account().getEmail() + "_" +  kakaoprofile.getId());
-			System.out.println("블로그서버 이메일:" + kakaoprofile.getKakao_account().getEmail() );
-			System.out.println("블로그서버 패스워드:" + cosKey);
 			
 			User kakaoUser = User.builder()
 					.username(kakaoprofile.getKakao_account().getEmail() + "_" +  kakaoprofile.getId())

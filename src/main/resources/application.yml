@@ -12,7 +12,6 @@ spring:
     view:
       prefix: /WEB-INF/views/
       suffix: .jsp
-# prefix는 컨트롤러가 리턴할 때 앞에 붙여주는 경로명이라고 한다. 
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -21,17 +20,18 @@ spring:
     password: cos1234
     
   jpa:
-    open-in-view: true #이걸 True로 해주면, Lazy 로딩이 가능하게 된다. 왜냐면 영속성을 프레젠테이션 계층까지 가져가게 된다.
+    open-in-view: true 
     hibernate:
-      ddl-auto: update # ddl-auto는 update, none. create등 많다. // 그렇기에 맨처음에만 create 그 이후에는 무조건 update로 바꿔놔야한다. 
+      ddl-auto: update 
       naming:
-        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl # 엔티티를 만들 때, 변수명 그대로 DB 필드에 넣어준다는 것
-      use-new-id-generator-mappings: false #JPA가 사용하는 기본 넘버링 전략을 사용하지 않는다는 뜻
-    #show-sql: true # 콘솔창에 보여주게 한다.
+        physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      use-new-id-generator-mappings: false 
     properties:
-      hibernate.format_sql: true # 이 부분은 show-sql 깔끔하게 보여주는 부분을 true로 해준다는 뜻이다.
+      hibernate.format_sql: true 
 
   jackson:
     serialization:
       fail-on-empty-beans: false
 
+cos:
+   key: cos1234
