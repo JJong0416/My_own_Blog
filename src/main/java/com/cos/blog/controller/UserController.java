@@ -24,15 +24,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-// 인증이 안된 사용자들이 출입할 수 있는 경로를 /auth를 표시해주고 허용한다.
-// 그냥 주소가 /이면 index.jsp 허용
-//static 이하 resource file (css,image,js)
-//ResponseBody는 Data를 리턴해주는 컨트롤러 함수가 된다. return "카카오 인증 완료" 하면 html메세지가 뜬다
-
 @Controller
 public class UserController {
 
-	@Value("${cos.key}") // yml 파일에서 값을 주입 받도록 할 수 있는 코드
+	@Value("${cos.key}") 
 	private String cosKey;
 	
 	@Autowired
@@ -59,33 +54,30 @@ public class UserController {
 		@GetMapping("auth/kakao/callback")
 		 public String kakaoCallback(String code) {  
 			
-			// Post 방식으로 key=value 타입으로 카카오쪽으로 4개의 데이터를 요청해야한다
-			RestTemplate rt = new RestTemplate(); // HttpsURLConnection으로 안하고 RestTemplate 사용
+			RestTemplate rt = new RestTemplate(); 
 			
-			// HttpHeader 생성
+
 			HttpHeaders headers = new HttpHeaders();
-			headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8"); // Content타입을 담는다는 의미는 전송한 http바디 데이터가 key=value형태라고 헤더에 알려주는 것
+			headers.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
 			
-			// HttpBody 오브젝트 생성
+
 			MultiValueMap<String,String> params = new LinkedMultiValueMap<>();
 			params.add("grant_type", "authorization_code");
 			params.add("client_id", "052b189ac4466ca21788954d51f47345");
 			params.add("redirect_uri", "http://localhost:7070/auth/kakao/callback");
 			params.add("code", code);
 			
-			// HttpHeader와 HttpBody를 하나의 오브젝트로 담기
+
 			HttpEntity<MultiValueMap<String,String>> kakaoTokenRequest = 
 						new HttpEntity<>(params,headers);
 			
-			// Http 요청하기 - post 방식으로 - 그리고 Response 변수의 응답 받음.
 			ResponseEntity<String> response = rt.exchange(
 					"https://kauth.kakao.com/oauth/token",
 					HttpMethod.POST,
 					kakaoTokenRequest,
 					String.class // 응답받을 
-			); // response가 String으로 토큰을 받음
+			); 
 			
-			// Gson, Json Simple, ObjectMapper 라이브러리를 사용
 			ObjectMapper objectMapper = new ObjectMapper();
 			OAuthToken oauthToken = null;
 			
@@ -96,9 +88,6 @@ public class UserController {
 			} catch(JsonProcessingException e) {
 				e.printStackTrace();
 			}
-			
-			System.out.println("카카오 엑세스 토큰 : "+oauthToken.getAccess_token());
-
 
 			RestTemplate rt2 = new RestTemplate();
 			
@@ -117,8 +106,7 @@ public class UserController {
 					kakaoProfileRequest2,
 					String.class 
 			); 
-			System.out.println(response2.getBody());
-			
+
 			ObjectMapper objectMapper2 = new ObjectMapper();
 			KakaoProfile kakaoprofile = null;
 			
@@ -137,14 +125,14 @@ public class UserController {
 					.oauth("kakao")
 					.build();
 			
-			// 가입자 & 비가입자 체크해서 처리
+
 			User originUser = userService.회원찾기(kakaoUser.getUsername());
 			
 			if (originUser.getUsername() == null){
 				userService.회원가입(kakaoUser);
 			}
 			
-			// 로그인 처리 
+
 			Authentication authentication = authenticationManger.authenticate(new UsernamePasswordAuthenticationToken(kakaoUser.getUsername(), cosKey));
 			SecurityContextHolder.getContext().setAuthentication(authentication);			
 			  
